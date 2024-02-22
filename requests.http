@@ -1,0 +1,11 @@
+GET http://localhost/laravel-api-sample/public/api/products
+
+###
+POST http://localhost/laravel-api-sample/public/api/products
+
+Content-Type: application/json
+
+{
+    "name": "hello",
+    "price": 69
+}
