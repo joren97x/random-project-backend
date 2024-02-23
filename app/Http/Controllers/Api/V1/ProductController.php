@@ -7,6 +7,7 @@ use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
@@ -30,9 +31,19 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreProductRequest $request)
+    public function store(Request $request)
     {
         //
+        $request->validate([
+            'name' => 'required',
+            'price' => 'required',
+            'details' => 'required',
+            'quantity' => 'required',
+            'image' => 'required'
+        ]);
+        
+        Product::create($request->all());
+        
     }
 
     /**
@@ -55,9 +66,18 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateProductRequest $request, Product $product)
+    public function update(Request $request, Product $product)
     {
         //
+        $request->validate([
+            'name' => 'required',
+            'price' => 'required',
+            'details' => 'required',
+            'quantity' => 'required',
+            'image' => 'required'
+        ]);
+
+        $product->update($request->all());
     }
 
     /**
@@ -66,5 +86,8 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         //
+
+        $product->delete();
+        
     }
 }

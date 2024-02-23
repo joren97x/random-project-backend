@@ -28,9 +28,17 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreUserRequest $request)
+    public function store(Request $request)
     {
         //
+        $request->validate([
+            'name' => 'required',        
+            'email' => 'required',
+            'password' => 'required'
+        ]);
+
+        User::create($request->all());
+
     }
 
     /**
@@ -53,9 +61,16 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateUserRequest $request, User $user)
+    public function update(Request $request, User $user)
     {
         //
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'password' => 'required'
+        ]);
+
+        $user->update($request->all());
     }
 
     /**
@@ -64,5 +79,6 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         //
+        $user->delete();
     }
 }
