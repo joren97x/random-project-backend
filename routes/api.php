@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\V1\AuthController;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -33,6 +34,7 @@ Route::get('/products/special-route/{product}', function(Product $product) {
 // Route::post('/products', function(Request $request) {
 //     return $request->name;
 // });
-
+Route::post('/authenticate', [AuthController::class, 'authenticate']);
+Route::post('/register', [AuthController::class, 'register']);
 Route::apiResource('products', ProductController::class);
 Route::apiResource('users', UserController::class);
