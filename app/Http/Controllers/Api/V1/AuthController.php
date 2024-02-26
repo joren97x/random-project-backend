@@ -28,7 +28,7 @@ class AuthController extends Controller
 
     public function register(Request $request) {
         $credentials = $request->validate([
-            'email' => ['required', 'email'],
+            'email' => ['required', 'email', 'unique:users'],
             'name' => 'required',
             'password' => 'required'
         ]);
@@ -37,6 +37,10 @@ class AuthController extends Controller
         return response()->json([
             'user' => $user
         ]);
+    }
+
+    public function getAuth() {
+        return Auth::user();
     }
 
 }

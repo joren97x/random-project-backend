@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\V1\AuthController;
+use App\Http\Controllers\Api\V1\GroupchatController;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -36,5 +37,7 @@ Route::get('/products/special-route/{product}', function(Product $product) {
 // });
 Route::post('/authenticate', [AuthController::class, 'authenticate']);
 Route::post('/register', [AuthController::class, 'register']);
+Route::get('/getAuth', [AuthController::class, 'getAuth']);
 Route::apiResource('products', ProductController::class);
 Route::apiResource('users', UserController::class);
+Route::apiResource('group-chat', GroupchatController::class);

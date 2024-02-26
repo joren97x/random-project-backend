@@ -11,11 +11,4 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost/laravel-api-sample/public/api/register
-
-Content-Type: application/json
-
-{
-    "name": "hello",
-    "price": 69
-}
+GET  http://localhost/laravel-api-sample/public/api/getAuth
