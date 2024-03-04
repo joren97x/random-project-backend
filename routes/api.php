@@ -28,16 +28,15 @@ use App\Models\User;
 //     return Product::all();
 // });
 
-Route::get('/products/special-route/{product}', function(Product $product) {
-    return $product;
-});
-
-// Route::post('/products', function(Request $request) {
-//     return $request->name;
-// });
-Route::post('/authenticate', [AuthController::class, 'authenticate']);
+//public routes
+Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
 Route::get('/getAuth', [AuthController::class, 'getAuth']);
 Route::apiResource('products', ProductController::class);
-Route::apiResource('users', UserController::class);
 Route::apiResource('group-chat', GroupchatController::class);
+
+//protected routes
+Route::group(['middleware' => 'auth:sanctum'], function() {
+    Route::post('/logout', [AuthController::class, 'logout']);
+    Route::apiResource('users', UserController::class);
+});
