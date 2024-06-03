@@ -6,6 +6,7 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\V1\ProductController;
+use App\Http\Controllers\Api\V1\TodoController;
 use App\Http\Controllers\Api\V1\UserController;
 use App\Models\User;
 
@@ -39,4 +40,5 @@ Route::apiResource('group-chat', GroupchatController::class);
 Route::group(['middleware' => 'auth:sanctum'], function() {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::apiResource('users', UserController::class);
+    Route::apiResource('todo', TodoController::class);
 });
