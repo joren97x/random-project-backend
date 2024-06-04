@@ -13,7 +13,7 @@ class TodoController extends Controller
      */
     public function index()
     {
-        //
+        // ge return tanang todos gikan sa database
         return ['todos' => Todo::all()];
     }
 
@@ -31,11 +31,13 @@ class TodoController extends Controller
     public function store(Request $request)
     {
         //
+        // ge validate una niya kung naa bay title ug dueTime
         $request->validate([
             'title' => 'required',
             'dueTime' => 'required'
         ]);
 
+        // then nag insert ug todo sa database
         Todo::create($request->all());
 
         return response(['message' => 'success']);
@@ -65,17 +67,22 @@ class TodoController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        // ge validate una niya kung naa bay title, completed ug dueTime
         $request->validate([
             'title' => 'required',
             'completed' => 'required',
             'dueTime' => 'required'
         ]);
 
+        // then gikuha ang todo
         $todo = Todo::find($id);
+
+        // dire ge set niya ang bag-ong data sa todo
         $todo->title = $request->title;
         $todo->completed = $request->completed;
         $todo->dueTime = $request->dueTime;
 
+        // dayon ge save or update
         $todo->save();
 
         return response(['message' => 'updated']);
@@ -87,7 +94,7 @@ class TodoController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        // ge delete toinkss
         return Todo::destroy($id);
     }
 }
